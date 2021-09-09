@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+     var p1 = new Promise((resolve, reject) => { 
+        setTimeout(resolve, 1000, 'one'); 
+    }); 
+    var p2 = new Promise((resolve, reject) => { 
+        setTimeout(resolve, 2000, 'two'); 
+    });
+    var p3 = new Promise((resolve, reject) => {
+        setTimeout(reject, 3000, 'three');
+    });
+    var p4 = new Promise((resolve, reject) => {
+        setTimeout(resolve, 4000, 'four');
+    });
+    var p5 = new Promise((resolve, reject) => {
+        setTimeout(reject, 4000, 'five');
+    });
+let PromiseArr=[p1,p2,p3,p4,p5];
+ function myPromise(promiseList) {
+        return promiseList.map(promise =>
+            promise.then((res) => ({ status: 'ok', res }), (err) => ({ status: 'not ok', err }))
+        )   
+    }
+    function pro() {
+        Promise.all(PromiseArr)
+        .then(
+            res =>{ 
+                  console.log(res,'正常返回');
+                //   if(PromiseArr.length==res.length){
+                //   //关闭loading
+                //   }
+            }
+            ,err=>console.log(err,'异步失败')
+        )
+    }
+pro()
+</script>

@@ -1,0 +1,156 @@
+<!--
+ * @Author: jh
+ * @Date: 2021-05-13 16:55:47
+ * @Description: file content
+ * @FilePath: \day01\7.js-ticket\views\search.ejs
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge"> -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>search</title>
+</head>
+<body>
+  <h1 id="serach">这是一个搜索页面</h1>
+  <button id="translate">北京市亦庄沃尔沃</button>
+
+<script src="http://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/zepto/1.0rc1/zepto.min.js"></script>
+<script>
+  /* 
+  1.绑定域名
+  2.引入js文件
+  3.通过config接口注入权限配置
+   */
+  wx.config({
+    debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+    appId: 'wx2eee9e5dbdc1ed5b', // 必填，公众号的唯一标识
+    timestamp: '<%= timestamp %>' , // 必填，生成签名的时间戳
+    nonceStr: '<%= noncestr %>', // 必填，生成签名的随机串
+    signature: '<%= signature %>',// 必填，签名
+    jsApiList: [
+      // 'onMenuShareQQ',
+      // 'onMenuShareQZone',
+      // 'startRecord',
+      // 'stopRecord',
+      // 'translateVoice',
+      // 'updateAppMessageShareData',
+      'openLocation',
+      'getLocation'
+    ] // 必填，需要使用的JS接口列表
+  });
+  wx.ready(function(){
+    console.log('微信ready成功了')
+    
+
+
+
+
+    // config信息验证后会执行ready方法，所有接口调用都必须在config接口获得结果之后，
+    //config是一个客户端的异步操作，所以如果需要在页面加载时就调用相关接口，则须把相关接口放在ready函数中调用来确保正确执行。
+    //对于用户触发时才调用的接口，则可以直接调用，不需要放在ready函数中。
+    //  判断当前客户端版本是否支持指定JS接口
+    // wx.checkJsApi({
+    //   jsApiList: [ 'onMenuShareQQ',
+    //   'onMenuShareQZone',
+    //   'startRecord',
+    //   'stopRecord',
+    //   'translateVoice'], // 需要检测的JS接口列表，所有JS接口列表见附录2,
+    //   success: function(res) {
+    //   // 以键值对的形式返回，可用的api值true，不可用为false
+    //   // 如：{"checkResult":{"chooseImage":true},"errMsg":"checkJsApi:ok"}
+    //   console.log(res,'判断当前客户端版本是否支持指定JS接口成功回调')
+    //   },
+    //   fail: function(err) {
+    //   // 以键值对的形式返回，可用的api值true，不可用为false
+    //   // 如：{"checkResult":{"chooseImage":true},"errMsg":"checkJsApi:ok"}
+    //   console.log(err)
+    //   },
+    // });
+    // var localId = ''
+    // let flag = false // 标志是否录音
+    // console.log($('#serach'),'dom元素')
+    // $('#serach').tap(function(){
+    //   console.log('点击-开始录音')
+    //   if(!flag){
+    //     wx.startRecord();
+    //     flag = true
+    //   }else {
+    //     console.log('点击-结束录音')
+    //     wx.stopRecord({
+    //       success: function (res) {
+    //         localId = res.localId;
+    //         flag = false
+    //       }
+    //     });
+    //   }
+    // })
+    //#region 
+   $('#translate').tap(function(){
+     console.log('翻译点击')
+     // wx.getLocation({
+    //   type: 'wgs84', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
+    //   success: function (res) {
+    //   //   var latitude = res.latitude; // 纬度，浮点数，范围为90 ~ -90
+    //   //   var longitude = res.longitude; // 经度，浮点数，范围为180 ~ -180。
+    //   //   var speed = res.speed; // 速度，以米/每秒计
+    //   //   var accuracy = res.accuracy; // 位置精度
+
+    //   // {latitude: 39.90469, longitude: 116.40717, errMsg: "getLocation:ok"}
+    //   console.log(res,'位置信息>>>>>>>')
+    //   }
+    // });
+    wx.openLocation({
+      latitude: 39.818653, // 纬度，浮点数，范围为90 ~ -90
+      longitude: 116.522102, // 经度，浮点数，范围为180 ~ -180。
+      name: '北京市亦庄沃尔沃', // 位置名
+      address: '北京市亦庄沃尔沃', // 地址详情说明
+      scale: 12, // 地图缩放级别,整型值,范围从1~28。默认为最大
+      infoUrl: 'http://www.baidu.com' // 在查看位置界面底部显示的超链接,可点击跳转
+    });
+      // wx.translateVoice({
+      //   localId: localId, // 需要识别的音频的本地Id，由录音相关接口获得
+      //   isShowProgressTips: 1, // 默认为1，显示进度提示
+      //   success: function (res) {
+      //     console.log(res)
+      //     alert(res.translateResult); // 语音识别的结果
+      //   }
+      // })
+
+      // http://t.yushu.im/v2/movie/search?q={text}?apikey=0b2bdeda43b5688921839c8ecb20399b
+      // let url = 'http://api.douban.com//v2/movie/search?callback=?&q=西虹市首富&apikey=0b2bdeda43b5688921839c8ecb20399b'
+
+      // $.getJSON(url, function(res){
+      //   console.log(res)
+      // });
+
+
+    //  // 自定义“分享给朋友”及“分享到QQ”按钮的分享内容
+    //     wx.updateAppMessageShareData({ 
+    //       title: '西虹市首富', // 分享标题
+    //       desc: '西虹市首富111', // 分享描述
+    //       link: 'http//:www.baidu.com', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+    //       imgUrl: 'http//:www.baidu.com', // 分享图标
+    //       success: function () {
+    //           // 用户确认分享后执行的回调函数
+    //           console.log('自定义“分享给朋友”及“分享到QQ”按钮的分享内容')
+    //       },
+    //       cancel: function () {
+    //           // 用户取消分享后执行的回调函数
+    //           console.log('分享取消')
+    //       }
+    //     })
+   })
+   //#endregion 
+
+  });
+  
+  wx.error(function(res){
+  
+    // config信息验证失败会执行error函数，如签名过期导致验证失败，具体错误信息可以打开config的debug模式查看，也可以在返回的res参数中查看，对于SPA可以在这里更新签名。
+  });
+  </script>
+  </body>
+  </html>

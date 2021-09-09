@@ -1,0 +1,21 @@
+{
+  "name": "20210511",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "got": "^11.8.2",
+    "qs": "^6.10.1",
+    "request": "^2.88.2",
+    "request-promise-native": "^1.0.9",
+    "sha1": "^1.1.1",
+    "xml2js": "^0.4.23"
+  }
+}
